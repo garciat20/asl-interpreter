@@ -6,17 +6,16 @@ from src.models.asl_model import ASLModel
 def preprocess_image(frame, target_size=(244,244)):
     # Resize frame to target size
     resized_frame = cv.resize(frame, target_size)
-    # Convert BGR to RGB (assuming OpenCV uses BGR by default)
+    #  BGR to RGB (assuming OpenCV uses BGR by default)
     resized_frame = cv.cvtColor(resized_frame, cv.COLOR_BGR2RGB)
     # Convert to tensor and normalize
     
     tensor_img = torch.tensor(resized_frame).permute(2, 0, 1).float() / 255.0
-    # Add batch dimension
+
     tensor_img = tensor_img.unsqueeze(0)
     return tensor_img
 
 def get_caption(output):
-    # Assuming output is a tensor containing class probabilities
     _, predicted_class = torch.max(output, 1)
     
     classes = ('A', 'B','Blank', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
@@ -26,15 +25,15 @@ def get_caption(output):
     return caption
 
 
-# Load your trained model
+# loading model  -- > make into main function and cleanup code everywher ewhne things get better
 model = ASLModel()
 model.load_state_dict(torch.load('asl_model.pth'))
 model.eval()
 
-cap = cv.VideoCapture(0)  # Use 0 for the default webcam
+cap = cv.VideoCapture(0)  #  0 --> defualt webacam
 
 while True:
-    ret, frame = cap.read()  # Read a frame from the webcam
+    ret, frame = cap.read()  # read frrame
     if not ret:
         break
 
@@ -49,17 +48,15 @@ while True:
         # print(model)
         prediction = model(tensor_frame)
 
-    # Get the caption from the prediction
     caption = get_caption(prediction)
 
-    # Display the frame with the caption
+    # dispkay capton
     cv.putText(frame, caption, (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     cv.imshow('ASL Interpreter', frame)
 
-    # Press 'q' to quit
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Release the webcam and close OpenCV windows
+#  cleanup 
 cap.release()
 cv.destroyAllWindows()

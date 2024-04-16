@@ -42,9 +42,14 @@ optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9): Here, you're 
 #         optimizer.step()
 #     print(f"Epoch {epoch+1}, Loss: {loss.item()}")
 
-# # Save your trained model if needed
+# Save your trained model if needed
 # torch.save(model.state_dict(), 'asl_model.pth')
 # Load the trained model
+
+
+
+
+
 model.load_state_dict(torch.load('asl_model.pth'))
 model.eval()
 classes = ('A', 'B', 'Blank', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -86,6 +91,15 @@ with torch.no_grad():
 for classname, correct_count in correct_pred.items():
     accuracy = 100 * float(correct_count) / total_pred[classname]
     print(f'Accuracy for class: {classname:5s} is {accuracy:.1f} %')
+
+
+
+
+
+
+
+
+
 # # Iterate over a batch of images from the test loader
 # for images, labels in test_loader:
 #     # Predict labels for the batch of images

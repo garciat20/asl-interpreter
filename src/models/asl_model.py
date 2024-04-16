@@ -16,10 +16,10 @@ class ASLModel(nn.Module):
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
         
         "change to 128"
-        self.fc1 = nn.Linear(32 * 61 * 61, 52) 
+        self.fc1 = nn.Linear(32 * 61 * 61, 128) 
 
         "change to 128"
-        self.fc2 = nn.Linear(52, num_classes)  # 26 classes for ASL alphabet
+        self.fc2 = nn.Linear(128, num_classes)  # 26 classes for ASL alphabet
 
 
     def forward(self, x):
