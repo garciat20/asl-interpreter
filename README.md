@@ -1,5 +1,7 @@
 # asl-interpreter
 
+NOTE: very poor accuracy at the moment, will work on it later
+
 install pytorch and opencv
 
 download dataset from kaggle: https://www.kaggle.com/datasets/lexset/synthetic-asl-alphabet?resource=download
