@@ -41,7 +41,7 @@ while True:
     tensor_frame = preprocess_image(frame)
 
     # invert
-    frame = cv.flip(frame, 1)
+    # frame = cv.flip(frame, 1)
 
     # Pass the frame through the model
     with torch.no_grad():
