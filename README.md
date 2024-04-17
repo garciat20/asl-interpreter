@@ -1,6 +1,8 @@
 # asl-interpreter
 
-NOTE: very poor accuracy at the moment, will work on it later
+NOTE: very poor accuracy at the moment, will work on it later. 
+
+Can't translate to full on sentences, only singular letters.
 
 install pytorch and opencv
 
